@@ -2,16 +2,23 @@ package com.video.streaming.youtube_clone_app.service;
 
 import com.video.streaming.youtube_clone_app.model.Video;
 import com.video.streaming.youtube_clone_app.repository.VideoRepo;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-@RequiredArgsConstructor
+
 public class VideoService
 {
     private final S3Service s3Service;
     private final VideoRepo videoRepo;
+
+    @Autowired
+    public VideoService(S3Service s3Service, VideoRepo videoRepo) {
+        this.s3Service = s3Service;
+        this.videoRepo = videoRepo;
+    }
+
     public void uploadVideo(MultipartFile multipartFile)
     {
         //Upload file to AWS S3

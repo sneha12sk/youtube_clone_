@@ -24,9 +24,14 @@ public class Video
     private  Integer dislikes;
     private Set<String>tags;
     private String videoUrl;
-    private videoStatus videoStatus;
+    private VideoStatus videoStatus;
     private Integer viewCount;
     private String thumbnailUrl;
     private List<Comment>commentList;
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
 
 }
