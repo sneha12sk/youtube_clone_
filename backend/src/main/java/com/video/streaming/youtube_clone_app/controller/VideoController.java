@@ -1,5 +1,7 @@
 package com.video.streaming.youtube_clone_app.controller;
 
+import com.video.streaming.youtube_clone_app.dto.UploadVideoResponse;
+import com.video.streaming.youtube_clone_app.dto.VideoDto;
 import com.video.streaming.youtube_clone_app.service.VideoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +22,25 @@ public class VideoController
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void uploadVideo(@RequestParam("file") MultipartFile file)
+    public UploadVideoResponse uploadVideo(@RequestParam("file") MultipartFile file)
+
     {
-       videoService.uploadVideo(file);
+       return videoService.uploadVideo(file);
+    }
+
+    //Implement Upload Thumbnail API
+    @PostMapping("/thumbnail")
+    @ResponseStatus(HttpStatus.CREATED)
+    public String uploadThumbnail(@RequestParam("file") MultipartFile file, @RequestParam("videoId")  String videoId)
+
+    {
+       return videoService.uploadThumbnail(file,videoId);
+    }
+
+    @PutMapping
+            @ResponseStatus(HttpStatus.OK)
+    public  VideoDto editVideoMetadata(@RequestBody VideoDto videoDto)
+    {
+       return videoService.editVideo(videoDto);
     }
 }
