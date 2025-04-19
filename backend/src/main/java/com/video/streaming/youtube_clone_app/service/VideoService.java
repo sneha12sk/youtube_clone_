@@ -53,10 +53,13 @@ public class VideoService
     public String uploadThumbnail(MultipartFile file, String videoId)
     {
         var savedVideo=getVideoById(videoId);
+
        String thumbnailUrl= s3Service.uploadFile(file);
+
+       savedVideo.setThumbnailUrl(thumbnailUrl);
        videoRepo.save(savedVideo);
 
-       return thumbnailUrl;
+      return thumbnailUrl;
 
     }
 
@@ -66,4 +69,20 @@ public class VideoService
                 .orElseThrow(()->new IllegalArgumentException("Cannot find video by the ID- "+videoId));
     }
 
+    public VideoDto getVideoDetails(String videoId)
+    {
+        Video savedVideo=getVideoById(videoId);
+
+        VideoDto videoDto= new VideoDto();
+
+        videoDto.setVideoUrl(savedVideo.getVideoUrl());
+        videoDto.setThumbnailUrl(savedVideo.getThumbnailUrl());
+        videoDto.setId(savedVideo.getId());
+        videoDto.setTitle(savedVideo.getTitle());
+        videoDto.setDescription(savedVideo.getDescription());
+        videoDto.setTags(savedVideo.getTags());
+        videoDto.setVideoStatus(savedVideo.getVideoStatus());
+
+        return videoDto;
+    }
 }

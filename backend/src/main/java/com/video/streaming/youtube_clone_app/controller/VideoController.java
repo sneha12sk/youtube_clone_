@@ -2,6 +2,7 @@ package com.video.streaming.youtube_clone_app.controller;
 
 import com.video.streaming.youtube_clone_app.dto.UploadVideoResponse;
 import com.video.streaming.youtube_clone_app.dto.VideoDto;
+import com.video.streaming.youtube_clone_app.model.Video;
 import com.video.streaming.youtube_clone_app.service.VideoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -43,4 +44,15 @@ public class VideoController
     {
        return videoService.editVideo(videoDto);
     }
+
+
+
+    //get video details method
+    @GetMapping("/{videoId}")
+    @ResponseStatus(HttpStatus.OK)
+    public VideoDto getVideoDetails(@PathVariable String videoId)
+    {
+       return  videoService.getVideoDetails(videoId);
+    }
 }
+
