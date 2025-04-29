@@ -20,4 +20,7 @@ public class VideoDto
     private Set<String> tags;
     private VideoStatus videoStatus;
     private String thumbnailUrl;
+    private Integer likeCount;
+    private Integer dislikeCount;
+    private Integer viewCount;
 }
